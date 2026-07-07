@@ -33,23 +33,24 @@
         "type": "github"
       }
     },
-    "make-shell": {
+    "home-manager": {
       "inputs": {
-        "flake-compat": [
-          "flake-compat"
+        "nixpkgs": [
+          "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1733933815,
-        "narHash": "sha256-9JjM7eT66W4NJAXpGUsdyAFXhBxFWR2Z9LZwUa7Hli0=",
-        "owner": "nicknovitski",
-        "repo": "make-shell",
-        "rev": "ffeceae9956df03571ea8e96ef77c2924f13a63c",
+        "lastModified": 1783221248,
+        "narHash": "sha256-ESQnuNHEDChsB4IxoLRhscVahqkDWkTb+qdIz8euYt4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "af2beae5f0fae0a4310cc0e6aef2572f56090353",
         "type": "github"
       },
       "original": {
-        "owner": "nicknovitski",
-        "repo": "make-shell",
+        "owner": "nix-community",
+        "ref": "release-26.05",
+        "repo": "home-manager",
         "type": "github"
       }
     },
@@ -88,7 +89,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
-        "make-shell": "make-shell",
+        "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }
     }
