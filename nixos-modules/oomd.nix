@@ -1,12 +1,5 @@
 { config, lib, ... }:
 with lib;
-let
-  sliceConfig = {
-    ManagedOOMMemoryPressure = "kill";
-    ManagedOOMMemoryPressureLimit = lib.mkDefault "80%";
-  };
-  cfg = config.nixies.oomd;
-in
 {
   options.nixies.oomd = {
     slices = mkOption {
@@ -21,7 +14,13 @@ in
     };
   };
 
-  config = {
+  config = let
+    sliceConfig = {
+      ManagedOOMMemoryPressure = "kill";
+      ManagedOOMMemoryPressureLimit = lib.mkDefault "80%";
+    };
+    cfg = config.nixies.oomd;
+  in {
     systemd.oomd = {
       enable = true;
       enableSystemSlice = false;  # dangerous without planning.
