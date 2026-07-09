@@ -6,18 +6,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-compat.url = "github:NixOS/flake-compat";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree.url = "github:denful/import-tree";
 
     themes.url = "github:RGBCube/ThemeNix";
   };
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } ({ self, withSystem, moduleWithSystem, ... }: {
-      #debug = true;
-      imports = [
-        inputs.home-manager.flakeModules.home-manager
-        ./nixos-modules
-        ./home-modules
-      ];
-      systems = [ "x86_64-linux" ];
-    });
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ self, ... }: {
+    #debug = true;
+    imports = [
+      #inputs.home-manager.flakeModules.home-manager
+      inputs.flake-parts.flakeModules.modules
+      (inputs.import-tree [ ./nixos-modules ./home-modules ])
+    ];
+    flake.nixosModules = self.modules.nixos;
+    flake.homeModules = self.modules.homeManager;
+    systems = [ "x86_64-linux" ];
+  });
 }
